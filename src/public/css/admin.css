@@ -1,5 +1,5 @@
 .all-tables {
-    margin-top: 100px;
+    margin-top: 30px;
 }
 
 .top-table {
@@ -43,17 +43,17 @@ table {
 }
 
 .item {
-    padding: 30px 50px;
+    padding: 10px 50px;
 
 
 }
 
-span {
+.weight  {  
     font-family: Hiragino Kaku Gothic Pro;
     font-size: 40px;
     font-weight: 600;
     line-height: 60px;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 /* .top-table th, */
@@ -166,9 +166,47 @@ font-family: Hiragino Kaku Gothic Pro;
     text-align: right;
 
 }
-
-.pagination {
+.pagination-content {
     text-align: center;
-    margin: 0 auto;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+.pagination {
+    display: flex;
+    margin-left: -80px;
+}
+.page-item-active
+ {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 7px;
+    background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
+}
+/* 色、形入れる */
+.page-item {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+        margin-right: 10px;
+        padding-top: 7px;
+        background: white;
+}
+/* 同上 */
+.page-link {
+    text-decoration: none;
+    color: #4b4b4b;
+    font-family: Hiragino Kaku Gothic Pro;
+        font-size: 18px;
+        font-weight: 300;
+        
+}
+.page-link-active {
+    color: white;
+    /* background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%); */
+    font-family: Hiragino Kaku Gothic Pro;
+        font-size: 18px;
+        font-weight: 300;
+        
 }

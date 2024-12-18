@@ -18,13 +18,14 @@ class WeightLogFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'=>User::inRandomOrder()->first()->id,
-            
+            // 'user_id'=>User::inRandomOrder()->first()->id,
+            'user_id'=>1,
             'date' => sprintf('2024-12-%02d', $this->faker->numberBetween(1, 31)),
 
             'weight'=> $this->faker->randomFloat(1,40.0,120.0),
             'calories'=> $this->faker->numberBetween(1000,2200),
-            'exercise_time'=> $this->faker->time('H:i'),
+            // 'exercise_time'=> $this->faker->time('H:i'),
+            'exercise_time'=> '00:' . str_pad($this->faker->numberBetween(0, 59),2, '0', STR_PAD_LEFT),
             'exercise_content'=> $this->faker->realText(120),
         ];
     }

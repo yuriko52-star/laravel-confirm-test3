@@ -15,9 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(4)->create();
+        User::factory()->create(['id'=>1]);
         WeightLog::factory(35)->create();
-        WeightTarget::factory(4)->create();
+        WeightTarget::factory(1)->create();
+        
 
 
     }
