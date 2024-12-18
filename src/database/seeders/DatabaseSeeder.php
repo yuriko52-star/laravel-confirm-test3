@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\WeightLog;
+use App\Models\WeightTarget;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,8 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(35)->create();
+        User::factory(4)->create();
         WeightLog::factory(35)->create();
+        WeightTarget::factory(4)->create();
+
 
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WeightLogController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/weight_logs',[WeightLogController::class,'index']);
+Route::get('/weight_logs/search',[WeightLogController::class,'search']);
+// エラーが出たら→name何たらをつける
