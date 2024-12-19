@@ -1,0 +1,123 @@
+.main-content {
+    width: 850px;
+    background-color: #fff;
+    padding: 30px;
+    margin-top: 60px;
+
+}
+
+h1 {
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 24px;
+    font-weight: 600;
+
+    text-align: left;
+
+}
+
+.label {
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 16px;
+    font-weight: 300;
+    padding-top: 10px;
+    text-align: left;
+    display: block;
+    margin-bottom: 10px;
+}
+
+span {
+    color: #fff;
+    background: red;
+    margin-left: 10px;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 0 5px;
+    border-radius: 3px;
+
+}
+
+
+.date,
+.input {
+    width: 760px;
+    height: 43px;
+    /* padding: 11px ; */
+    border: 1px solid #E0DFDE;
+    border-radius: 5px;
+}
+
+.textarea {
+    width: 760px;
+    height: 160px;
+}
+
+.error {
+    color: red;
+    margin-top: 5px;
+}
+.button-content {
+    margin-top: 0;
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    gap: 10px;
+}
+.back,
+.button-update,
+.trash-can-content {
+    z-index: 10;
+    /* 他の要素よりも上に配置 */
+}
+.back {
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #E0DFDE;
+    text-decoration: none;
+    border-radius: 12px;
+    cursor:pointer;
+    box-shadow: 0px 4px 10px 0px #0000001A;
+    margin-left: 20px;
+    padding-top: 20px;
+}
+
+.button-update {
+    width: 200px;
+    height: 60px;
+    border: none;
+    color: #fff;
+    font-family: Hiragino Kaku Gothic Pro;
+    font-size: 20px;
+    font-weight: 600;
+    background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 4px 4px rgb(224, 224, 224);
+    display: inline-block;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.delete {
+    display: flex;
+    position: relative;
+    top: -60px;
+}
+.trash-can-content {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-left: 720px;
+    margin-bottom: 30px;
+    border: none;
+    background: #fff;
+   
+}
+
+.img-trash-can {
+    width: 45px;
+    height: 45px;
+}

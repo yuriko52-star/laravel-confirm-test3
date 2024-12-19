@@ -17,12 +17,15 @@
              
             <tr class="row">
 
-              <!-- ここにあたいをうめこむ -->
               
               <td class="item"><span class="weight">{{ $weightTarget->target_weight }}</span>kg
               </td>
-              <td class="item"><span class="weight">-1.5</span>kg</td>
-              <td class="item"><span class="weight">60.0</span>kg</td>
+              
+
+              <td class="item"><span class="weight">{{ $weightDifference }}</span>kg</td>
+              
+
+              <td class="item"><span class="weight">{{ $latestWeightOverall }}</span>kg</td>
               
             </tr>
            
@@ -33,14 +36,17 @@
            <div class="form-group">
               <div class="date-item">
                
-                <!-- ここにも埋め込む -->
-                <input type="date" class="date" name="date" value="">
+                
+                <input type="date" class="date" name="start_date" value="{{old('start_date', $startDate ?? '')}}">
                 ~
-                <input type="date" class="date" name="date" value="">
+                
+                <input type="date" class="date" name="end_date" value="{{old('end_date',$endDate ?? '' ) }}">
               <div class="seach-result">
-                <!-- ここにも -->
-                  ～の検索結果
-                  <label class="result">5件</label>
+                
+                 @if(isset($startDate) && isset($endDate))
+                  {{ $startDate }}～{{ $endDate }}の検索結果
+                  <label class="result">{{$resultCount}}件</label>
+                  @endif
                 </div>
               </div>
               <div class="search-form__actions">
@@ -66,14 +72,13 @@
             </tr>
              @foreach ($weightLogs as $log)
             <tr class="row">
-             
-              <!-- ここにも -->
-              <td class="data-item">{{ $log->date}}</td>
+             <td class="data-item">{{ \Carbon\Carbon::parse($log->date)->format('Y/m/d') }}</td>
               <td class="data-item">{{$log->weight}} kg</td>
               <td class="data-item">{{$log->calories}} cal</td>
-              <td class="data-item">{{$log->exercise_time}}</td>
+             <td class="data-item">{{ \Carbon\Carbon::parse($log->exercise_time)->format('H:i') }}</td>
               <td class="data-item">
-                <a href="" class="">
+               
+                <a href="{{ route('weight_logs.show',['weightLogId'=>$log->id]) }}" class="">
                   <img src="{{ asset('/images/Group.png') }}" alt="" class="pen-img">
                 </a>
               </td>
@@ -87,4 +92,22 @@
           </form>
         </div>
       </div>
+
+      <style>
+    table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+ 
+  table tr {
+    transition: background-color 0.3s ease;
+  }
+
+  
+  table tr:hover {
+    background-color: #f0f8ff; 
+    cursor: pointer; 
+  }
+  </style>
 @endsection

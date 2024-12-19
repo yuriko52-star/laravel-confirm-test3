@@ -18,6 +18,10 @@ use App\Http\Controllers\WeightLogController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/weight_logs',[WeightLogController::class,'index']);
+Route::get('/weight_logs',[WeightLogController::class,'index'])->name('weight_logs.index');
+// あとでweight_logsに戻す
 Route::get('/weight_logs/search',[WeightLogController::class,'search']);
-// エラーが出たら→name何たらをつける
+
+Route::get('/weight_logs/{weightLogId}',[WeightLogController::class,'show'])->name('weight_logs.show');
+Route::put('/weight_logs/{weightLogId}/update',[WeightLogController::class,'update'])->name('weight_logs.update');
+Route::delete('/weight_logs/{weightLogId}/delete',[WeightLogController::class,'destroy'])->name('weight_logs.delete');
