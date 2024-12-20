@@ -21,6 +21,8 @@ Route::get('/', function () {
 Route::get('/weight_logs',[WeightLogController::class,'index'])->name('weight_logs.index');
 // あとでweight_logsに戻す
 Route::get('/weight_logs/search',[WeightLogController::class,'search']);
+Route::get('/weight_logs/create',[WeightLogController::class,'create'])->name('weight_logs.create');
+Route::post('/weight_logs/create',[WeightLogController::class,'store'])->name('weight_logs.store');
 
 Route::get('/weight_logs/{weightLogId}',[WeightLogController::class,'show'])->name('weight_logs.show');
 Route::put('/weight_logs/{weightLogId}/update',[WeightLogController::class,'update'])->name('weight_logs.update');

@@ -52,7 +52,10 @@
               <div class="search-form__actions">
                 <input class="search-form__search-btn btn" type="submit" value="検索">
                 <input class="search-form__reset-btn btn" type="submit" value="リセット" name="reset">
-                <input type="submit" class="add-btn btn" value="データ追加">
+                <!-- <input type="submit" class="add-btn btn" value="加データ追"> -->
+                <a href="#modal1" class="add-link">データ追加</a>
+
+
               </div>
             </div>
            <table>
@@ -110,4 +113,52 @@
     cursor: pointer; 
   }
   </style>
+<!-- モーダル -->
+  <div class="modal" id="modal1">
+    <a href="#!" class="modal-overlay"></a>
+      <div class="modal-inner">
+        <div class="modal-content">
+          
+            <h1>Weight Logをを追加</h1>
+           <!--  -->
+            <form action="{{route('weight_logs.store')  }}" class="modal-form" method="post">
+             @csrf
+              <label class="modal-label">日付<span class="modal-span">必須</span></label>
+              <input type="date" class="modal-date" name="date"value="{{old('date')}}">
+                <!--  -->
+              <p class="modal-error">日付を選択してね</p>
+                
+              <label for="" class="modal-label">体重<span class="modal-span">必須</span></label>
+              <input type="text" class="modal-input"name="weight" value="{{old('weight')}}">kg
+            <!--  -->
+                <p class="modal-error">体重を入力してね</p>
+
+                <label for="" class="modal-label">摂取カロリー<span class="modal-span">必須</span></label>
+                <input type="text" class="modal-input"name="calories" value="{{old('calories')}}">cal
+                <!--  -->
+                <p class="modal-error">摂取カロリーを入力してね</p>
+
+                <label for="" class="modal-label">運動時間<span class="modal-span">必須</span></label>
+                <!-- えらーになったらチャットに聞く -->
+                <input type="time" name="exercise_time"class="modal-input"value="{{ old('exercise_time', now()->format('H:i')) }}">
+                <!--  -->
+                <p class="modal-error">運動時間を入力してね</p>
+
+                <label for="" class="modal-label">運動内容
+                </label>
+                <textarea name="exercise_content" class="modal-textarea">{{ old('exercise_content') }}</textarea>
+                <!--  -->
+                <p class="modal-error">運動内容を入力してね</p>
+
+                <div class="modal-button-content">
+                    <a href="#" class="modal-back">戻る</a>
+                    <input type="submit" class="modal-button-create"value="登録">
+                </div>
+            </form>
+<!-- </form> -->
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
 @endsection

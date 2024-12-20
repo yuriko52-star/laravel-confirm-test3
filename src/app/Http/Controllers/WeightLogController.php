@@ -105,6 +105,30 @@ class WeightLogController extends Controller
 
             return redirect()->route('weight_logs.index');
         }
+
+
+         public function create()
+     {
+       
+        $weightLog = new WeightLog();
+        return view('weight_logs.create'); 
+    }
+
+        public function store(Request $request)
+    {
+        $userId = 1;
+
+        
+        $weightLog = new WeightLog();
+        $weightLog->user_id = $userId;
+        $weightLog->date = $request->input('date');
+        $weightLog->weight = $request->input('weight');$weightLog->calories = $request->input('calories');
+        $weightLog->exercise_time = $request->input('exercise_time') . ':00';
+        $weightLog->exercise_content= $request->input('exercise_content');
+
+        $weightLog->save();
+        return redirect()->route('weight_logs.index'); 
+    }
 }
 
    
