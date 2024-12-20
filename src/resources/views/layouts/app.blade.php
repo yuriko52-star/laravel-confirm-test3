@@ -18,7 +18,7 @@
             <div class="header__link-group">
                 <div class="header__link-item">
                 <img src="{{ asset('/images/設定の歯車アイコン素材 1.png')}}" alt="" class="">
-                <a href="" class="target-weight__link">目標体重設定</a>
+                <a href="{{ route('goal.setting') }}" class="target-weight__link">目標体重設定</a>
                 </div>
                 <div class="header__link-item">
                 <img src="{{ asset('/images/ログアウト・サインアウトのアイコン素材 4 (1).png') }}" alt="" class="">

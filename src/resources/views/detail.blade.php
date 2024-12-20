@@ -27,7 +27,7 @@
                 <p class="error">運動時間を入力してね</p>
                 <label for="" class="label">運動内容
                 </label>
-                <textarea name="exercise_content" class="textarea">{{ old('exercise_content',$weightLog->exercise_content)}}"</textarea>
+                <textarea name="exercise_content" class="textarea">{{ old('exercise_content',$weightLog->exercise_content)}}</textarea>
                 <p class="error">運動内容を入力してね</p>
 
                 <div class="button-content">

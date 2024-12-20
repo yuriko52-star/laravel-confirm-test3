@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Pagination\Paginator;
 
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\WeightLog;
@@ -14,18 +15,16 @@ class WeightLogController extends Controller
         
         // ログイン中のユーザーIDを取得fortifyを設定したらこのコードにする
         // $userId = auth()->id();
-        $userId = 1; // 表示したいユーザーのIDを指定
-
-       
-        $weightLogs = WeightLog::where('user_id', $userId)->orderBy('date', 'asc')->paginate(8);
+         $userId = 1; // 表示したいユーザーのIDを指定
+          $weightLogs = WeightLog::where('user_id', $userId)->orderBy('date', 'asc')->paginate(8);
 
         
         $latestWeight = $weightLogs->last()->weight ?? null;
-       
-        $latestWeightOverall = WeightLog::where('user_id', $userId)
-        ->orderBy('date', 'desc')
+
+         $latestWeightOverall = WeightLog::where('user_id', $userId)
+        ->orderBy('date', 'desc') // 最新の日付で降順ソート
         ->first()->weight ?? null;
-        
+
         $weightTarget = WeightTarget::where('user_id', $userId)->first();
 
       
@@ -35,9 +34,6 @@ class WeightLogController extends Controller
        
         
         return view('admin', compact('weightLogs', 'latestWeightOverall', 'weightTarget', 'weightDifference'));
-
-
-        
     }
    
     
@@ -50,6 +46,8 @@ class WeightLogController extends Controller
         if ($request->has('reset')) {
             return redirect('/weight_logs');
         }   
+ 
+
         $weightTarget = WeightTarget::where('user_id', $userId)->first();
         $weightLogsAll = WeightLog::where('user_id', $userId)->orderBy('date', 'asc')->get();
          $latestWeightOverall = WeightLog::where('user_id', $userId)
@@ -76,7 +74,8 @@ class WeightLogController extends Controller
         $resultCount = $weightLogs->total();
         
         return view('admin', compact('weightLogs', 'weightTarget', 'latestWeightOverall', 'weightDifference', 'startDate', 'endDate','resultCount'));
-}
+        }
+        
         public function show($weightLogId)
         {
            $weightLog = WeightLog::findOrFail($weightLogId);
@@ -129,6 +128,9 @@ class WeightLogController extends Controller
         $weightLog->save();
         return redirect()->route('weight_logs.index'); 
     }
-}
+        public function goalSetting()
+    {
+         return view('change');
+    }
 
-   
+} 
