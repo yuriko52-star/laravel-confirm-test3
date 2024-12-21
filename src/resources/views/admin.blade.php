@@ -126,29 +126,49 @@
               <label class="modal-label">日付<span class="modal-span">必須</span></label>
               <input type="date" class="modal-date" name="date"value="{{old('date')}}">
                 <!--  -->
-              <p class="modal-error">日付を選択してね</p>
+              <p class="modal-error">
+                @error('date')
+                {{ $message}}
+                @enderror
+              </p>
                 
               <label for="" class="modal-label">体重<span class="modal-span">必須</span></label>
               <input type="text" class="modal-input"name="weight" value="{{old('weight')}}">kg
             <!--  -->
-                <p class="modal-error">体重を入力してね</p>
+                <p class="modal-error">
+                  @error('weight')
+                  {{ $message }}
+                  @enderror
+                </p>
 
                 <label for="" class="modal-label">摂取カロリー<span class="modal-span">必須</span></label>
                 <input type="text" class="modal-input"name="calories" value="{{old('calories')}}">cal
                 <!--  -->
-                <p class="modal-error">摂取カロリーを入力してね</p>
+                <p class="modal-error">
+                  @error('calories')
+                  {{ $message }}
+                  @enderror
+                </p>
 
                 <label for="" class="modal-label">運動時間<span class="modal-span">必須</span></label>
                 <!-- えらーになったらチャットに聞く -->
                 <input type="time" name="exercise_time"class="modal-input"value="{{ old('exercise_time', now()->format('H:i')) }}">
                 <!--  -->
-                <p class="modal-error">運動時間を入力してね</p>
+                <p class="modal-error">
+                  @error('exercise_time')
+                  {{ $message}}
+                  @enderror
+                </p>
 
                 <label for="" class="modal-label">運動内容
                 </label>
                 <textarea name="exercise_content" class="modal-textarea">{{ old('exercise_content') }}</textarea>
                 <!--  -->
-                <p class="modal-error">運動内容を入力してね</p>
+                <p class="modal-error">
+                  @error('exercise_content')
+                  {{ $message }}
+                  @enderror
+                </p>
 
                 <div class="modal-button-content">
                     <a href="#" class="modal-back">戻る</a>

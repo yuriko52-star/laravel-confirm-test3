@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\WeightLog;
 use App\Models\WeightTarget;
+use App\Http\Requests\WeightLogRequest;
+
 class WeightLogController extends Controller
 {
      public function index()
@@ -83,7 +85,7 @@ class WeightLogController extends Controller
            return view('detail',compact('weightLog'));
         }
 
-        public function update(Request $request ,$weightLogId)
+        public function update(WeightLogRequest $request ,$weightLogId)
         {
             $weightLog = WeightLog::findOrFail($weightLogId);
             $weightLog->date = $request->input('date');
@@ -113,7 +115,7 @@ class WeightLogController extends Controller
         return view('weight_logs.create'); 
     }
 
-        public function store(Request $request)
+        public function store(WeightLogRequest $request)
     {
         $userId = 1;
 

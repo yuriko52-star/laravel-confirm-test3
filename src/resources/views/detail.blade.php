@@ -11,24 +11,44 @@
             <form action="{{ route('weight_logs.update',$weightLog->id) }}" class="detail-form" method="post">
               @method('put')
               @csrf
-                    <label class="label">日付<span>必須</span></label>
+                    <label class="label">日付</label>
                     <input type="date" class="date" name="date"value="{{old('date' ,$weightLog->date)}}">
                 
-                <p class="error">日付を選択してね</p>
+                <p class="error">
+                    @error('date')
+                    {{ $message }}
+                    @enderror
+                </p>
                 
-                <label for="" class="label">体重<span>必須</span></label>
+                <label for="" class="label">体重</label>
                 <input type="text" class="input"name="weight" value="{{old('weight',$weightLog->weight)}}">kg
-                <p class="error">体重を入力してね</p>
-                <label for="" class="label">摂取カロリー<span>必須</span></label>
+                <p class="error">
+                    @error('weight')
+                    {{ $message }}
+                    @enderror
+                </p>
+                <label for="" class="label">摂取カロリー</label>
                 <input type="text" class="input"name="calories" value="{{old('calories',$weightLog->calories)}}">cal
-                <p class="error">摂取カロリーを入力してね</p>
-                <label for="" class="label">運動時間<span>必須</span></label>
+                <p class="error">
+                    @error('calories')
+                    {{ $message}}
+                    @enderror
+                </p>
+                <label for="" class="label">運動時間</label>
                 <input type="text" name="exercise_time"class="input"value="{{ \Carbon\Carbon::parse($weightLog->exercise_time)->format('H:i') }}">
-                <p class="error">運動時間を入力してね</p>
+                <p class="error">
+                    @error('exercise_time')
+                    {{ $message }}
+                    @enderror
+                </p>
                 <label for="" class="label">運動内容
                 </label>
                 <textarea name="exercise_content" class="textarea">{{ old('exercise_content',$weightLog->exercise_content)}}</textarea>
-                <p class="error">運動内容を入力してね</p>
+                <p class="error">
+                    @error('exercise_content')
+                    {{ $message }}
+                    @enderror
+                </p>
 
                 <div class="button-content">
                     <a href="/weight_logs" class="back">戻る</a>
