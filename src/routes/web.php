@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WeightLogController;
+use App\Http\Middleware\EnsureStep1Completed;
 
 
 /*
@@ -15,20 +16,36 @@ use App\Http\Controllers\WeightLogController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+    // return view('welcome');
+// });
+Route::prefix('register')->group(function () {
+    Route::get('/step1', [WeightLogController::class, 'showStep1'])->name('register.step1');
+    Route::post('/step1', [WeightLogController::class, 'processStep1']);
+
+    Route::get('/step2', [WeightLogController::class, 'showStep2'])
+        ->middleware(EnsureStep1Completed::class)
+        ->name('register.step2');
+    Route::post('/step2', [WeightLogController::class, 'processStep2']);
 });
-Route::get('/weight_logs',[WeightLogController::class,'index'])->name('weight_logs.index');
+
+
+
+
+
+Route::middleware('auth')->group(function() {
+    Route::get('/weight_logs',[WeightLogController::class,'index'])->name('weight_logs.index');
 // あとでweight_logsに戻す
-Route::get('/weight_logs/search',[WeightLogController::class,'search']);
-Route::get('/weight_logs/create',[WeightLogController::class,'create'])->name('weight_logs.create');
-Route::post('/weight_logs/create',[WeightLogController::class,'store'])->name('weight_logs.store');
+// (weight_logs.index);も
+    Route::get('/weight_logs/search',[WeightLogController::class,'search']);
+    Route::get('/weight_logs/create',[WeightLogController::class,'create'])->name('weight_logs.create');
+    Route::post('/weight_logs/create',[WeightLogController::class,'store'])->name('weight_logs.store');
 
-Route::match(['get','post'],'/weight_logs/goal_setting', [WeightLogController::class, 'goalSetting'])->name('goal.setting');
+    Route::match(['get','post'],'/weight_logs/goal_setting', [WeightLogController::class, 'goalSetting'])->name('goal.setting');
 
-Route::get('/weight_logs/{weightLogId}',[WeightLogController::class,'show'])->name('weight_logs.show');
-Route::put('/weight_logs/{weightLogId}/update',[WeightLogController::class,'update'])->name('weight_logs.update');
-Route::delete('/weight_logs/{weightLogId}/delete',[WeightLogController::class,'destroy'])->name('weight_logs.delete');
-
+    Route::get('/weight_logs/{weightLogId}',[WeightLogController::class,'show'])->name('weight_logs.show');
+    Route::put('/weight_logs/{weightLogId}/update',[WeightLogController::class,'update'])->name('weight_logs.update');
+    Route::delete('/weight_logs/{weightLogId}/delete',[WeightLogController::class,'destroy'])->name('weight_logs.delete');
+});
 
 

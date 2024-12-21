@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Pagination\Paginator;
-
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -11,7 +11,54 @@ use App\Models\WeightTarget;
 use App\Http\Requests\WeightLogRequest;
 
 class WeightLogController extends Controller
-{
+{   
+    public function showStep1()
+    {
+        return view('auth.register1');
+    }
+    public function processStep1(Request $request) {
+// バリデーションは別のところに書くけどこれはここでいいのかな
+    Session::put('registration', $request->only('name', 'email', 'password'));
+    return redirect()->route('register.step2');
+    }
+     public function showStep2()
+    {
+        return view('auth.register2');
+    }
+    
+    public function processStep2(WeightLogRequest $request) 
+    {
+        $validated = $request->validated();
+        $registrationData = Session::get('registration');
+
+        $user = User::create([
+            'name' => $registrationData['name'],
+            'email' => $registrationData['email'],
+            'password' => bcrypt($registrationData['password']),
+            // 'current_weight' => $request->current_weight,
+            // 'target_weight' => $request->target_weight,
+        ]);
+            $user->weightLogs()->create([
+        'weight' => $validated['current_weight'],
+            ]);
+         // current_weightをweight_logsテーブルに保存
+        // $user = auth()->user();
+        $user->weightTarget()->create([
+        'target_weight' => $validated['target_weight'],
+        ]);
+
+    // 登録完了後のリダイレクト
+        // return redirect('/weight_logs')->with('success', '目標体重が設定されました！');
+        
+         Session::forget('registration');
+        // $user = auth()->user();
+        Auth::login($user);
+
+        return redirect('/login');
+    }
+
+
+
      public function index()
     {
         
@@ -36,6 +83,9 @@ class WeightLogController extends Controller
        
         
         return view('admin', compact('weightLogs', 'latestWeightOverall', 'weightTarget', 'weightDifference'));
+        
+
+        // return view('auth.login');
     }
    
     

@@ -29,6 +29,8 @@ class WeightLogRequest extends FormRequest
            'calories' => 'required | numeric',
             'exercise_time' => 'required',
             'exercise_content' => 'max:120',
+            'current_weight' =>'required | between:0,9999 | regex:/^\d+(\.\d)?$/',
+            'target_weight' => 'required | between:0,9999 | regex:/^\d+(\.\d)?$/',
         ];
     }
     public function messages()
@@ -43,6 +45,15 @@ class WeightLogRequest extends FormRequest
             'calories.numeric' =>'数字で入力してください',
             'exercise_time.required' =>'運動時間を入力してください',
             'exercise_content.max' =>'120文字以内で入力してください',
+            'current_weight.required' =>'現在の体重を入力してください',
+            'current_weight.between' => '４桁までの数字で入力してください',
+            'current_weight.regex' => '小数点は1桁で入力してください',
+            'target_weight.required' =>'目標の体重を入力してください',
+            'target_weight.between' => '４桁までの数字で入力してください',
+             'target_weight.regex' => '小数点は1桁で入力してください',
+
+
+            
         ];
 
     }
