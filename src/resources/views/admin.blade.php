@@ -16,16 +16,14 @@
             </tr>
              
             <tr class="row">
-
-              
-              <td class="item"><span class="weight">{{ $weightTarget->target_weight }}</span>kg
+            <td class="item"><span class="weight">{{ $weightTarget->target_weight  }}</span>kg
               </td>
               
 
               <td class="item"><span class="weight">{{ $weightDifference }}</span>kg</td>
               
 
-              <td class="item"><span class="weight">{{ $latestWeightOverall  }}</span>kg</td>
+              <td class="item"><span class="weight">{{ $latestWeightOverall }}</span>kg</td>
               
             </tr>
            

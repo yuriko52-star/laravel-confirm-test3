@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Session;
+
+// use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -11,58 +12,60 @@ use App\Models\WeightTarget;
 use App\Http\Requests\WeightLogRequest;
 
 class WeightLogController extends Controller
-{   
-    public function showStep1()
-    {
-        return view('auth.register1');
-    }
-    public function processStep1(Request $request) {
-// バリデーションは別のところに書くけどこれはここでいいのかな
-    Session::put('registration', $request->only('name', 'email', 'password'));
-    return redirect()->route('register.step2');
-    }
-     public function showStep2()
-    {
-        return view('auth.register2');
-    }
+// {   
+    // ダメなら消そう
+    // public function showStep1()
+    // {
+        // return view('auth.register1');
+    // }
     
-    public function processStep2(WeightLogRequest $request) 
-    {
-        $validated = $request->validated();
-        $registrationData = Session::get('registration');
+      
+    // public function showStep2(Request $request)
+// {
+    // ダメなら消そう
+    // step1のデータをそのままビューに渡す
+    // return view('auth.register2', [
+        // 'name' => $request->name,
+        // 'email' => $request->email,
+        // 'password' => $request->password,
+    // ]);
+// }
+// ダメなら消そう
+// public function registerComplete(Request $request)
+{
+    // バリデーションを行う
+    /*$validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users',
+        'password' => 'required|string|min:8',
+        'current_weight' => 'required|numeric|min:1',
+        'target_weight' => 'required|numeric|min:1',
+    ]);
 
-        $user = User::create([
-            'name' => $registrationData['name'],
-            'email' => $registrationData['email'],
-            'password' => bcrypt($registrationData['password']),
-            // 'current_weight' => $request->current_weight,
-            // 'target_weight' => $request->target_weight,
-        ]);
-            $user->weightLogs()->create([
-        'weight' => $validated['current_weight'],
-            ]);
-         // current_weightをweight_logsテーブルに保存
-        // $user = auth()->user();
-        $user->weightTarget()->create([
+    // ユーザーを作成
+    $user = User::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => bcrypt($validated['password']),
+    ]);
+
+    // weight_targetsテーブルに目標体重を保存
+    $user->weightTarget()->create([
         'target_weight' => $validated['target_weight'],
-        ]);
+    ]);
 
-    // 登録完了後のリダイレクト
-        // return redirect('/weight_logs')->with('success', '目標体重が設定されました！');
-        
-         Session::forget('registration');
-        // $user = auth()->user();
-        Auth::login($user);
+    // weight_logsテーブルに現在の体重を保存
+    $user->weightLogs()->create([
+        'weight' => $validated['current_weight'],
+    ]);
 
-        return redirect('/login');
-    }
-
-
-
-     public function index()
+    // 登録後のリダイレクト
+    return redirect('/weight_logs');
+}
+*/
+public function index()
     {
-        
-        // ログイン中のユーザーIDを取得fortifyを設定したらこのコードにする
+       // ログイン中のユーザーIDを取得fortifyを設定したらこのコードにする
         // $userId = auth()->id();
          $userId = 1; // 表示したいユーザーのIDを指定
           $weightLogs = WeightLog::where('user_id', $userId)->orderBy('date', 'asc')->paginate(8);
@@ -82,8 +85,37 @@ class WeightLogController extends Controller
         : null;
        
         
-        return view('admin', compact('weightLogs', 'latestWeightOverall', 'weightTarget', 'weightDifference'));
+
+
+
+
+
+
+
+
+
+    // $user= auth()->user(); // ログイン中のユーザー
+    // $currentWeight = $user->weightLogs()->latest()->first(); // 最新の体重ログを取得
+
+    
+
+        //  $latestWeightOverall = WeightLog::where('user_id', $userId)
+        // ->orderBy('id', 'desc') // 最新の日付で降順ソート
+        // ->first()->weight ?? null;
         
+        // ->value('weight');
+
+        // $weightTarget =  $user->weightTarget;
+
+      
+        // $weightDifference = $weightTarget && $currentWeight
+        // ?  $currentWeight- $weightTarget->target_weight
+        // : null;
+    // $latestWeightOverallを currentWeightにおきかえ  
+        
+        return view('admin',  compact('weightLogs', 'latestWeightOverall', 'weightTarget', 'weightDifference'));
+
+       
 
         // return view('auth.login');
     }

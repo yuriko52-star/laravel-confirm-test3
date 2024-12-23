@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +10,7 @@
 <body>
   <main>  
 <div class="content">
-   
-    <div class="login-title__group">
+   <div class="login-title__group">
         <h2 class="title">PiGLy</h2>
         <h3 class="login__heading">ログイン</h3>
     </div>
@@ -24,7 +23,6 @@
                 @error('email')
                 {{ $message}}
                 @enderror
-                
             </p>
             <label class="form__group-label">パスワード</label>
             <input type="password" class="form__group-input" name="password">
@@ -38,7 +36,7 @@
             <button class="next__button" type="submit">
                 ログイン
             </button>
-            <a href="{{ route('register.step1') }}" class="login__link">アカウント作成はこちら</a>
+            <a href="" class="login__link">アカウント作成はこちら</a>
         </div>
     </form>
 </div>

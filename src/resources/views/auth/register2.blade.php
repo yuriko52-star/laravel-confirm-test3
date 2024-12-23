@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +10,15 @@
 <body>
     <main>
     <div class="content">
-   
         <div class="register-title__group">
             <h2 class="title">PiGLy</h2>
             <h3 class="register__heading">新規会員登録</h3>
             <h4 class="info__regisrer">step2 体重データの入力</h4>
         </div>
-        <form action="{{route('register.step2') }}" class="register__form" method="post">
-            @csrf
-            <div class="form__group">
+       <form action="{{ route('register.2') }}" 
+        class="register__form"method="post">
+       @csrf
+        <div class="form__group">
                 <label class="form__group-label">現在の体重</label>
                 <input type="text" class="form__group-input"name="current_weight" value="{{ old('current_weight') }}"><span>kg</span>
                  <p>
