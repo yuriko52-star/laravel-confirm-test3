@@ -4,9 +4,6 @@
     background-color: white;
     text-align: center;
     border: none;
-
-    /* position: relative; */
-
 }
 
 h1 {
@@ -15,8 +12,6 @@ h1 {
     font-weight: 600;
     padding: 30px;
     margin-top: 20px;
-
-
     color: #333333;
 
 }
@@ -27,9 +22,6 @@ input {
     border: 1px solid #E0DFDE;
     border-radius: 5px;
     margin: 40px 0;
-
-
-
 }
 
 .kg {
@@ -59,11 +51,11 @@ input {
     background-color: #E0DFDE;
     text-decoration: none;
     border-radius: 12px;
-    /* box-shadow: 4px 4px rgb(224, 224, 224); */
+    
     box-shadow: 0px 4px 10px 0px #0000001A;
     padding-top: 15px;
    
-    /* text-align: center; */
+    
     margin-right: 100px;
 }
 
@@ -80,6 +72,6 @@ input {
     border: none;
     padding: 15px;
     border-radius: 12px;
-    /* box-shadow: 4px 4px rgb(224, 224, 224); */
+   
     background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
 }

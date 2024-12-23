@@ -8,10 +8,7 @@
     background: #fff;
     margin-bottom: 30px;
     display: grid;
-    /* align-items: stretch; */
-    /* flex-wrap: wrap; */
-    /* justify-content: space-between; */
-    /* gap: 24px; */
+    
     grid-template-columns: 1fr 1fr 1hr;
 
 }
@@ -53,10 +50,9 @@ table {
     font-size: 40px;
     font-weight: 600;
     line-height: 60px;
-    /* padding: 20px; */
 }
 
-/* .top-table th, */
+
 .top-table td:not(:first-child) {
     border-left: 1px solid #ddd;
 }
@@ -114,7 +110,7 @@ font-family: Hiragino Kaku Gothic Pro;
     width: 160px;
     height: 45px;
     padding: 6.5px 15px ;
-    /* gap: 10px; */
+   
     border-radius: 12px;
     font-family: Hiragino Kaku Gothic Pro;
     font-size: 20px;
@@ -142,8 +138,6 @@ font-family: Hiragino Kaku Gothic Pro;
     font-family: Hiragino Kaku Gothic Pro;
     font-size: 16px;
     font-weight: 600;
-    /* margin-left: 50px; */
-    /* display: inline-block; */
     text-align: left;
 
 }
@@ -185,7 +179,7 @@ font-family: Hiragino Kaku Gothic Pro;
     padding-top: 7px;
     background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
 }
-/* 色、形入れる */
+
 .page-item {
     width: 40px;
     height: 40px;
@@ -194,7 +188,7 @@ font-family: Hiragino Kaku Gothic Pro;
         padding-top: 7px;
         background: white;
 }
-/* 同上 */
+
 .page-link {
     text-decoration: none;
     color: #4b4b4b;
@@ -205,7 +199,6 @@ font-family: Hiragino Kaku Gothic Pro;
 }
 .page-link-active {
     color: white;
-    /* background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%); */
     font-family: Hiragino Kaku Gothic Pro;
         font-size: 18px;
         font-weight: 300;
@@ -221,8 +214,7 @@ font-family: Hiragino Kaku Gothic Pro;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
-    /* transition: opacity 0.3s ease; */
-    /* z-index: 1000; */
+   
 }
 
 .modal:target {
@@ -243,7 +235,7 @@ font-family: Hiragino Kaku Gothic Pro;
     position: absolute;
     top: 50%;
     left: 50%;
-    /* width: 50%; */
+    
     width: 850px;
     border: 1px solid #8B7969;
     background-color: #fff;
@@ -258,9 +250,7 @@ font-family: Hiragino Kaku Gothic Pro;
     background-color: #fff;
     padding: 30px;
     margin-top: 60px;
-    /* 必要なら追加 */
-    /* position: relative; */
-        /* padding: 64px 64px; */
+   
 
 }
 
@@ -300,7 +290,7 @@ h1 {
 .modal-input {
     width: 760px;
     height: 43px;
-    /* padding: 11px ; */
+   
     border: 1px solid #E0DFDE;
     border-radius: 5px;
 }
@@ -327,7 +317,7 @@ h1 {
 .modal-button-create
  {
     z-index: 10;
-    /* 他の要素よりも上に配置 */
+    
 }
 
 .modal-back {

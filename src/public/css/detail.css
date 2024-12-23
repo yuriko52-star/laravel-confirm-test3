@@ -42,7 +42,7 @@ span {
 .input {
     width: 760px;
     height: 43px;
-    /* padding: 11px ; */
+    
     border: 1px solid #E0DFDE;
     border-radius: 5px;
 }
@@ -67,7 +67,7 @@ span {
 .button-update,
 .trash-can-content {
     z-index: 10;
-    /* 他の要素よりも上に配置 */
+    
 }
 .back {
     display: inline-block;

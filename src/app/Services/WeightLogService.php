@@ -15,16 +15,16 @@ class WeightLogService
      */
     public static function calculateWeightData(int $userId): array
     {
-        // 最新体重ログの取得
+        
         $latestLog = WeightLog::where('user_id', $userId)
             ->orderBy('date', 'desc')
             ->first();
 
         $latestWeightOverall = $latestLog ? $latestLog->weight : null;
-        // 目標体重の取得
+       
         $weightTarget = WeightTarget::where('user_id', $userId)->first();
 
-        // 体重差の計算
+        
         $weightDifference = $weightTarget && $latestWeightOverall
             ? $latestWeightOverall - $weightTarget->target_weight
             : null;
