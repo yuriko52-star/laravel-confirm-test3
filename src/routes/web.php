@@ -18,9 +18,9 @@ use App\Http\Controllers\WeightLogController;
 |
 */
 
-// Route::get('/', function () {
-    // return view('welcome');
-// });
+Route::get('/', function () {
+     return view('welcome');
+ });
 /*Fortify::loginView(function () {
     return view('auth.login');
 });

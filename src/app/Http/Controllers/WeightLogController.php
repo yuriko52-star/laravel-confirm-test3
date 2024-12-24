@@ -16,8 +16,6 @@ class WeightLogController extends Controller
     // }
     // public function showStep2(Request $request)
 // {
-    // ダメなら消そう
-    // step1のデータをそのままビューに渡す
     // return view('auth.register2', [
         // 'name' => $request->name,
         // 'email' => $request->email,
