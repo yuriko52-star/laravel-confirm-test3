@@ -75,3 +75,7 @@ input {
    
     background: linear-gradient(90deg, #A3A6E1 0%, #FFABD9 100%);
 }
+.error {
+    color: red;
+    
+}

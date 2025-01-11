@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fortify;
 
-// use Laravel\Fortify\Contracts\LogoutResponse;
+use Laravel\Fortify\Contracts\LogoutResponse;
 
 class CustomLogoutResponse implements LogoutResponse
 {

@@ -3,13 +3,14 @@
 namespace App\Providers;
 
 use App\Actions\Fortify\CreateNewUser;
-// use App\Actions\Fortify\CustomLogoutResponse;
+use App\Actions\Fortify\CustomLogoutResponse;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
-// use Laravel\Fortify\Fortify;
-// use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
+use App\Http\Requests\RegistrationRequest;
+use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use App\Http\Requests\LoginRequest;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -19,7 +20,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //  $this->app->singleton(\Laravel\Fortify\Contracts\LogoutResponse::class, CustomLogoutResponse::class);    
+         $this->app->singleton(\Laravel\Fortify\Contracts\LogoutResponse::class, CustomLogoutResponse::class);    
     }
 
     /**
@@ -28,26 +29,28 @@ class FortifyServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Fortify::createUsersUsing(CreateNewUser::class);
-       
-        //  Fortify::registerView(function () {
-            // return redirect('/register/step1');
-        // });
 
-        // Fortify::loginView(function () {
-            // return view('auth.login');
-        // });
+        
+       
+         Fortify::registerView(function () {
+            return view('/auth.register1');
+        });
+
+        Fortify::loginView(function () {
+            return view('auth.login');
+        });
         
 
         RateLimiter::for('login', function (Request $request) {
            /* $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());*/
-            // $email = (string) $request->email;
+            $email = (string) $request->email;
 
             // return Limit::perMinute(10)->by($throttleKey);
-            // return Limit::perMinute(10)->by($email . $request->ip());
+            return Limit::perMinute(10)->by($email . $request->ip());
 
         });
 
-        // $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
+        $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
 
 
         // RateLimiter::for('two-factor', function (Request $request) {

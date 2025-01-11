@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Actions\Fortify;
-
+// use App\Http\Requests\RegistrationRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-// use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -17,6 +17,10 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @param  array<string, string>  $input
      */
+    
+
+
+
     public function create(array $input): User
     {
         Validator::make($input, [
@@ -35,4 +39,5 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
         ]);
     }
+
 }

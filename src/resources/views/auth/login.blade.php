@@ -36,7 +36,7 @@
             <button class="next__button" type="submit">
                 ログイン
             </button>
-            <a href="" class="login__link">アカウント作成はこちら</a>
+            <a href="{{ route('register.step1') }}" class="login__link">アカウント作成はこちら</a>
         </div>
     </form>
 </div>

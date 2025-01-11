@@ -44,13 +44,16 @@ body {
 }
 
 .header__link-item {
-    padding: 10px 5px;
+    /* padding: 10px 5px; */
     border: 1px solid #CDCDCD;
     border-radius: 5px;
     display: flex;
     margin-left: 10px;
     background-color: #F7F7F7;
+    /* border: none; */
 }
+
+
 
 .header__link img {
 
@@ -63,13 +66,17 @@ body {
 .target-weight__link,
 .log__link {
     display: inline-block;
-    text-decoration: none;
+  border: none;
+    background-color: #F7F7F7;
     font-family: Hiragino Kaku Gothic Pro;
     font-size: 16px;
     font-weight: 300;
-    margin-right: 10px;
+    margin:0   0 10px 10px ;
     margin-left: 5px;
     color: #333333;
+    width: 120px;
+    padding-top: 10px;
+    height: 40px;
 }
 
 main {

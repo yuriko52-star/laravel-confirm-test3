@@ -15,7 +15,7 @@
             <h3 class="register__heading">新規会員登録</h3>
             <h4 class="info__regisrer">step1 アカウント情報の登録</h4>
         </div>
-        <form action="{{ route('register.step1') }}" class="register__form" method="post" >
+        <form action="{{ route('register.step1.process') }}" class="register__form" method="post" >
         @csrf
         <div class="form__group">
             <label class="form__group-label">お名前</label>

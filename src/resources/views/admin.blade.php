@@ -16,14 +16,14 @@
             </tr>
              
             <tr class="row">
-            <td class="item"><span class="weight">{{ $weightTarget->target_weight  }}</span>kg
+            <td class="item"><span class="weight">{{  $weightTarget ? $weightTarget->target_weight : '未設定' }}</span>kg
               </td>
               
 
-              <td class="item"><span class="weight">{{ $weightDifference }}</span>kg</td>
+              <td class="item"><span class="weight">{{ $weightDifference!== null ? $weightDifference : '未設定'}}</span>kg</td>
               
 
-              <td class="item"><span class="weight">{{ $latestWeightOverall }}</span>kg</td>
+              <td class="item"><span class="weight">{{  $latestWeightOverall }}</span>kg</td>
               
             </tr>
            
@@ -56,6 +56,7 @@
 
               </div>
             </div>
+
            <table>
             <colgroup>
               <col style="width: 300px;">
@@ -71,7 +72,8 @@
               <th class="data-label">運動時間</th>
               <th class="data-label"> </th>
             </tr>
-             @foreach ($weightLogs as $log)
+             
+              @foreach($weightLogs as $log)
             <tr class="row">
              <td class="data-item">{{ \Carbon\Carbon::parse($log->date)->format('Y/m/d') }}</td>
               <td class="data-item">{{$log->weight}} kg</td>
@@ -85,11 +87,12 @@
               </td>
             </tr>
             @endforeach
+           
 
            </table>
            <div class="pagination-content">
             {{$weightLogs->appends(request()->query())->links('pagination::bootstrap-4')}}
-           </div>
+            </div>
           </form>
         </div>
       </div>
@@ -112,18 +115,18 @@
   }
   </style>
 <!-- モーダル -->
-  <div class="modal" id="modal1">
+   <div class="modal" id="modal1"> 
     <a href="#!" class="modal-overlay"></a>
       <div class="modal-inner">
         <div class="modal-content">
           
             <h1>Weight Logをを追加</h1>
-           <!--  -->
-            <form action="{{route('weight_logs.store')  }}" class="modal-form" method="post">
+           
+            <form action="{{route('weight_logs.store') }}" class="modal-form" method="post">
              @csrf
               <label class="modal-label">日付<span class="modal-span">必須</span></label>
               <input type="date" class="modal-date" name="date"value="{{old('date')}}">
-                <!--  -->
+                
               <p class="modal-error">
                 @error('date')
                 {{ $message}}
@@ -132,7 +135,7 @@
                 
               <label for="" class="modal-label">体重<span class="modal-span">必須</span></label>
               <input type="text" class="modal-input"name="weight" value="{{old('weight')}}">kg
-            <!--  -->
+            
                 <p class="modal-error">
                   @error('weight')
                   {{ $message }}
@@ -141,7 +144,7 @@
 
                 <label for="" class="modal-label">摂取カロリー<span class="modal-span">必須</span></label>
                 <input type="text" class="modal-input"name="calories" value="{{old('calories')}}">cal
-                <!--  -->
+                
                 <p class="modal-error">
                   @error('calories')
                   {{ $message }}
@@ -149,9 +152,9 @@
                 </p>
 
                 <label for="" class="modal-label">運動時間<span class="modal-span">必須</span></label>
-                <!-- えらーになったらチャットに聞く -->
-                <input type="time" name="exercise_time"class="modal-input"value="{{ old('exercise_time', now()->format('H:i')) }}">
-                <!--  -->
+                
+                <input type="text" name="exercise_time"class="modal-input"value="{{ old('exercise_time', now()->format('H:i')) }}">
+                
                 <p class="modal-error">
                   @error('exercise_time')
                   {{ $message}}
@@ -161,7 +164,7 @@
                 <label for="" class="modal-label">運動内容
                 </label>
                 <textarea name="exercise_content" class="modal-textarea">{{ old('exercise_content') }}</textarea>
-                <!--  -->
+                
                 <p class="modal-error">
                   @error('exercise_content')
                   {{ $message }}
@@ -173,7 +176,7 @@
                     <input type="submit" class="modal-button-create"value="登録">
                 </div>
             </form>
-<!-- </form> -->
+
         </div>
       </div>
     </a>

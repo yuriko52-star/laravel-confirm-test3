@@ -15,7 +15,7 @@
             <h3 class="register__heading">新規会員登録</h3>
             <h4 class="info__regisrer">step2 体重データの入力</h4>
         </div>
-       <form action="{{ route('register.2') }}" 
+       <form action="{{ route('register.step2.process') }}" 
         class="register__form"method="post">
        @csrf
         <div class="form__group">

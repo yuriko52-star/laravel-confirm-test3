@@ -3,73 +3,52 @@
 namespace App\Http\Controllers;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
-use App\Models\User;
+
 use App\Models\WeightLog;
 use App\Models\WeightTarget;
+
 use App\Http\Requests\WeightLogRequest;
 
 class WeightLogController extends Controller
  {   
-   // public function showStep1()
-    // {
-        // return view('auth.register1');
-    // }
-    // public function showStep2(Request $request)
-// {
-    // return view('auth.register2', [
-        // 'name' => $request->name,
-        // 'email' => $request->email,
-        // 'password' => $request->password,
-    // ]);
-// }
-// public function registerComplete(Request $request)
-// {
-   /* $user = User::create([
-        'name' => $validated['name'],
-        'email' => $validated['email'],
-        'password' => bcrypt($validated['password']),
-    ]);
-    $user->weightTarget()->create([
-        'target_weight' => $validated['target_weight'],
-    ]);
-    $user->weightLogs()->create([
-        'weight' => $validated['current_weight'],
-    ]);
-    
-    return redirect('/weight_logs');
-}
-*/
+   
+
 public function index()
     {
-       // ログイン中のユーザーIDを取得fortifyを設定したらこのコードにする
-        // $userId = auth()->id();
-         $userId = 1; 
-          $weightLogs = WeightLog::where('user_id', $userId)->orderBy('date', 'asc')->paginate(8);
-        $latestWeight = $weightLogs->last()->weight ?? null;
-         $latestWeightOverall = WeightLog::where('user_id', $userId)
+    
+        $user_id = auth()->id();
+        
+          $weightLogs = WeightLog::where('user_id', $user_id)->orderBy('date', 'asc')->paginate(8);
+       
+        // $latestWeight = $weightLogs->last()->weight ?? null;
+         $latestWeightOverall = WeightLog::where('user_id', $user_id)
         ->orderBy('date', 'desc') 
         ->first()->weight ?? null;
 
-        $weightTarget = WeightTarget::where('user_id', $userId)->first();
+        $weightTarget = WeightTarget::where('user_id', $user_id)->first();
          $weightDifference = $weightTarget && $latestWeightOverall
         ?  $latestWeightOverall - $weightTarget->target_weight
         : null;
-       
-        return view('admin',  compact('weightLogs', 'latestWeightOverall', 'weightTarget', 'weightDifference'));
+       \Log::info('WeightLogs: ', $weightLogs->toArray());
+    \Log::info('WeightTarget: ', $weightTarget ? $weightTarget->toArray() : []);
+    \Log::info('Latest Weight: ' . $latestWeightOverall);
+    \Log::info('Weight Difference: ' . $weightDifference);
+
+
+        return view('admin',  compact('weightLogs',  'weightTarget', 'latestWeightOverall','weightDifference'));
     }
    
-    public function search(Request $request)
+        public function search(Request $request)
     { 
          // ログイン中のユーザーだけを取得
-    // $user = auth()->user();
-       $userId = 1; // 今だけ表示したいユーザーのIDを指定
-
+    
+         $user_id = auth()->id();
         if ($request->has('reset')) {
             return redirect('/weight_logs');
         }   
-         $weightTarget = WeightTarget::where('user_id', $userId)->first();
-        $weightLogsAll = WeightLog::where('user_id', $userId)->orderBy('date', 'asc')->get();
-         $latestWeightOverall = WeightLog::where('user_id', $userId)
+         $weightTarget = WeightTarget::where('user_id', $user_id)->first();
+        $weightLogsAll = WeightLog::where('user_id', $user_id)->orderBy('date', 'asc')->get();
+         $latestWeightOverall = WeightLog::where('user_id', $user_id)
         ->orderBy('date', 'desc') 
         
         ->first()->weight ?? null;
@@ -84,7 +63,7 @@ public function index()
         $endDate = $request->input('end_date');
 
    
-        $weightLogs = WeightLog::where('user_id', $userId)
+        $weightLogs = WeightLog::where('user_id', $user_id)
         ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
             $query->whereBetween('date', [$startDate, $endDate]);
         })
@@ -94,7 +73,7 @@ public function index()
         
         return view('admin', compact('weightLogs', 'weightTarget', 'latestWeightOverall', 'weightDifference', 'startDate', 'endDate','resultCount'));
     }
-        
+       
     public function show($weightLogId)
     {
            $weightLog = WeightLog::findOrFail($weightLogId);
@@ -123,17 +102,19 @@ public function index()
 
             return redirect()->route('weight_logs.index');
     }
-     public function create()
+        public function create()
      {
        $weightLog = new WeightLog();
         return view('weight_logs.create'); 
     }
-    public function store(WeightLogRequest $request)
+    
+        public function store(WeightLogRequest $request)
     {
-        $userId = 1;
+        
+        $user_id = auth()->id();
 
         $weightLog = new WeightLog();
-        $weightLog->user_id = $userId;
+        $weightLog->user_id = $user_id;
         $weightLog->date = $request->input('date');
         $weightLog->weight = $request->input('weight');$weightLog->calories = $request->input('calories');
         $weightLog->exercise_time = $request->input('exercise_time') . ':00';
@@ -142,9 +123,9 @@ public function index()
         $weightLog->save();
         return redirect()->route('weight_logs.index'); 
     }
-    public function goalSetting()
-    {
-         return view('change');
-    }
-
-} 
+  
+    
+    
+         
+   
+}
